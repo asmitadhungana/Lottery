@@ -16,8 +16,14 @@ beforeEach(async () => {
   //Use one of those accounts to deploy
   //the contract
   inbox = await new web3.eth.Contract(JSON.parse(interface)) //Teaches web3 about what methods an Inbox contracts has  |   first argument to Contract constructor is the ABI, when the solc compiled our contract, it spitted out a JSON representation of our interface, but since we want to pass a JS object and not JSON, we parsed the JSON to get back JS object
-    .deploy({ data: bytecode, arguments: ["Hi there!"] }) //TELLS web3 THAT WE WANT TO DEPLOY A NEW COPY OF THIS CONTRACT |   deploy takes the compiled contract bytecode and the list of arguments that the contract constructor fxn expects
-    .send({ from: accounts[0], gas: "1000000" }); //INSTRUCTS web3 TO SEND OUT A TRNSXN THAT CREATES THIS CONTRACT |   accounts[0] is deploying our contract with the given gas limit
+    .deploy({
+      data: bytecode,
+      arguments: ["Hi there!"],
+    }) //TELLS web3 THAT WE WANT TO DEPLOY A NEW COPY OF THIS CONTRACT |   deploy takes the compiled contract bytecode and the list of arguments that the contract constructor fxn expects
+    .send({
+      from: accounts[0],
+      gas: "1000000",
+    }); //INSTRUCTS web3 TO SEND OUT A TRNSXN THAT CREATES THIS CONTRACT |   accounts[0] is deploying our contract with the given gas limit
 
   inbox.setProvider(provider);
 });
